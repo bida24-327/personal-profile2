@@ -1,27 +1,289 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
+<head>
     <meta charset="UTF-8">
-    <meta name="viewport" conten="width=device-width,initial-scale=1.0">
-    <title>My personal Profile</title>
-  </head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Zippy's Slime - Squishy Fun!</title>
+    <style>
+        /* Base styles for the page */
+        body {
+            font-family: 'Comic Sans MS', cursive, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f0f8ff;
+            overflow-x: hidden;
+        }
+
+        /* Header styles with animation */
+        header {
+            background: linear-gradient(45deg, #ff9a9e, #fad0c4);
+            padding: 20px;
+            text-align: center;
+            position: relative;
+            animation: headerPulse 5s infinite alternate;
+        }
+
+        /* Keyframe animation for header pulsing effect */
+        @keyframes headerPulse {
+            0% { background: linear-gradient(45deg, #ff9a9e, #fad0c4); }
+            50% { background: linear-gradient(45deg, #fad0c4, #a18cd1); }
+            100% { background: linear-gradient(45deg, #a18cd1, #fbc2eb); }
+        }
+
+        /* Main title styles with bounce animation */
+        h1 {
+            color: #fff;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+            font-size: 3rem;
+            margin: 0;
+            animation: bounce 2s infinite;
+        }
+
+        /* Bounce animation for the title */
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        /* Navigation styles */
+        nav {
+            background-color: rgba(255, 255, 255, 0.8);
+            padding: 15px;
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            border-radius: 0 0 20px 20px;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: #ff6b88;
+            font-weight: bold;
+            padding: 8px 15px;
+            border-radius: 20px;
+            transition: all 0.3s ease;
+        }
+
+        /* Hover effect for navigation links */
+        nav a:hover {
+            background-color: #ff6b88;
+            color: white;
+            transform: scale(1.1);
+        }
+
+        /* Main content container */
+        .container {
+            max-width: 1200px;
+            margin: 30px auto;
+            padding: 0 20px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        /* Slime product card styles */
+        .slime-card {
+            background: white;
+            border-radius: 20px;
+            padding: 20px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Hover effect for slime cards */
+        .slime-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Slime image styles with wiggle animation */
+        .slime-img {
+            width: 200px;
+            height: 200px;
+            margin: 0 auto;
+            background-size: cover;
+            background-position: center;
+            border-radius: 50%;
+            animation: wiggle 4s infinite;
+        }
+
+        /* Wiggle animation for slime images */
+        @keyframes wiggle {
+            0%, 100% { transform: rotate(-3deg); }
+            50% { transform: rotate(3deg); }
+        }
+
+        /* Color classes for different slime types */
+        .rainbow-slime {
+            background: linear-gradient(45deg, #ff0000, #ff7f00, #ffff00, #00ff00, #0000ff, #4b0082, #9400d3);
+        }
+
+        .glitter-slime {
+            background: linear-gradient(45deg, #ff9a9e, #fad0c4);
+            position: relative;
+        }
+
+        /* Glitter effect pseudo-element */
+        .glitter-slime::after {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20"><rect width="2" height="2" x="9" y="9" fill="white"/></svg>');
+            background-size: 20px 20px;
+            opacity: 0.7;
+            animation: glitter 2s linear infinite;
+        }
+
+        /* Glitter animation */
+        @keyframes glitter {
+            0% { background-position: 0 0; }
+            100% { background-position: 20px 20px; }
+        }
+
+        /* Footer styles */
+        footer {
+            background-color: #333;
+            color: white;
+            text-align: center;
+            padding: 20px;
+            margin-top: 50px;
+        }
+
+        /* Floating slime blob in the corner */
+        .slime-blob {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 100px;
+            height: 100px;
+            background-color: #a1ffce;
+            border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+            animation: blob 8s ease-in-out infinite;
+            z-index: 100;
+            cursor: pointer;
+        }
+
+        /* Blob morphing animation */
+        @keyframes blob {
+            0%, 100% { border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%; transform: scale(1); }
+            25% { border-radius: 40% 60% 60% 40% / 60% 40% 60% 40%; transform: scale(1.1); }
+            50% { border-radius: 60% 40% 40% 60% / 40% 60% 40% 60%; transform: scale(0.9); }
+            75% { border-radius: 30% 70% 70% 30% / 70% 30% 70% 30%; transform: scale(1.05); }
+        }
+
+        /* Button styles with squish effect */
+        .btn {
+            background-color: #ff6b88;
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 30px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 15px;
+        }
+
+        /* Button hover and active states */
+        .btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 5px 15px rgba(255, 107, 136, 0.4);
+        }
+
+        .btn:active {
+            transform: scale(0.95);
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2rem;
+            }
+            nav {
+                flex-wrap: wrap;
+            }
+        }
+    </style>
+</head>
 <body>
+    <!-- Header section with animated background -->
     <header>
-      <h1>Welcome to my website!</h1>
-      <nav>
-         <a href="index.html">Home</a>
-        <a href="about.html">About</a>
-        <a href="contact.html">Contact</a>
-        <a href="skills.html">Skills</a>
-        <a href="education.html">Education</a>
-      </nav>
+        <h1>Zippy's Slime</h1>
+        <p>The squishiest, stretchiest, most satisfying slime around!</p>
     </header>
-    <main>
-      <p> This is my personal website</p>
-      <img src=""alt="me">
-    </main>
-   <footer>
-    <p>&copy; 2025 Emma Kasongo
-   </footer>
- </body>
+
+    <!-- Navigation menu -->
+    <nav>
+        <a href="#">Home</a>
+        <a href="#">Shop</a>
+        <a href="#">About</a>
+        <a href="#">Contact</a>
+        <a href="#">DIY Recipes</a>
+    </nav>
+
+    <!-- Main content container -->
+    <div class="container">
+        <!-- Slime product cards -->
+        <div class="slime-card">
+            <div class="slime-img rainbow-slime"></div>
+            <h2>Rainbow Swirl</h2>
+            <p>Our most colorful slime with a mesmerizing rainbow pattern!</p>
+            <button class="btn">Add to Cart</button>
+        </div>
+
+        <div class="slime-card">
+            <div class="slime-img glitter-slime"></div>
+            <h2>Glitter Galaxy</h2>
+            <p>Sparkly slime that shimmers like a starry night sky!</p>
+            <button class="btn">Add to Cart</button>
+        </div>
+
+        <div class="slime-card">
+            <div class="slime-img" style="background-color: #a1ffce;"></div>
+            <h2>Minty Fresh</h2>
+            <p>Cool mint-colored slime with a refreshing scent!</p>
+            <button class="btn">Add to Cart</button>
+        </div>
+    </div>
+
+    <!-- Floating slime blob -->
+    <div class="slime-blob" onclick="alert('Squish! 😊')"></div>
+
+    <!-- Footer section -->
+    <footer>
+        <p>&copy; 2023 Zippy's Slime. All rights reserved.</p>
+        <p>Made with ❤️ and lots of squish!</p>
+    </footer>
+
+    <!-- Simple JavaScript for interactive elements -->
+    <script>
+        // Make slime cards jiggle when mouse enters
+        const cards = document.querySelectorAll('.slime-card');
+        cards.forEach(card => {
+            card.addEventListener('mouseenter', () => {
+                card.style.animation = 'wiggle 0.5s ease';
+            });
+            
+            card.addEventListener('mouseleave', () => {
+                card.style.animation = '';
+            });
+        });
+
+        // Make the blob change color when clicked
+        const blob = document.querySelector('.slime-blob');
+        const colors = ['#a1ffce', '#ff9a9e', '#a18cd1', '#fbc2eb', '#ffecd2'];
+        let currentColor = 0;
+        
+        blob.addEventListener('click', () => {
+            currentColor = (currentColor + 1) % colors.length;
+            blob.style.backgroundColor = colors[currentColor];
+        });
+    </script>
+</body>
 </html>
